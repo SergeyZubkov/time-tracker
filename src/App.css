@@ -1,21 +1,41 @@
+
 .App {
+  height: 100%;
   text-align: center;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 40px;
 }
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
   color: white;
+  padding: 20px;
+}
+
+.App-header h2 img{
+  vertical-align: middle;
+}
+
+.App-header h2 {
+  margin: 0;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.app-body {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: #f6f9fc;
 }
 
 @keyframes App-logo-spin {
