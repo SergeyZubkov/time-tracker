@@ -1,0 +1,22 @@
+.visibility-filter {
+	margin-bottom: 15px;
+}
+
+.visibility-filter__option {
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-right: 10px;
+	cursor: pointer;
+	color: #999;
+}
+
+.visibility-filter__option:hover {
+	text-decoration: underline;
+	
+}
+
+.visibility-filter__option_active {
+	color: #35b6da;
+	text-decoration: underline;
+}

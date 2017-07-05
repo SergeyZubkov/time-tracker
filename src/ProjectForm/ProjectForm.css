@@ -7,7 +7,7 @@
 	display: flex;
 	align-items: center;
 	padding: 0 30px;
-	border-bottom: 2px solid #35b6da;
+	border-bottom: 2px solid #e8ebed;
 }
 
 .project-form input {
@@ -31,7 +31,7 @@
 	width: 150px;
 	margin-left: auto;
 	font-family: "Roboto", sans-serif;
-
+	cursor: pointer;
   color: #f1f1f1;
   background: #35b6da;
   text-transform: uppercase;
@@ -40,4 +40,10 @@
   border: solid 0 #e3edf4;
   border-bottom: 2px solid #1b92b3;
   border-radius: 4px;
+}
+
+
+.btn-submit.btn-submit_disable {
+	opacity: 0.65;
+	cursor: not-allowed;
 }

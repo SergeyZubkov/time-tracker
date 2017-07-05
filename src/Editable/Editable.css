@@ -1,0 +1,12 @@
+.editable {
+	width: 100%;
+}
+
+.project-item input.editable {
+	height: 25px;
+	margin-right: 50px;
+	padding: 5px 10px;
+	background: #f6f8f9;
+	border: 1px solid #e8ebed;
+	font-family: "Roboto", sans-serif;
+}

@@ -13,7 +13,9 @@ class Dropdown extends React.Component {
 		this.state = {
 			isOpen: false,
 			orentationHorizontal: 'left',
-			orentationVertical: 'bottom'
+			orentationVertical: 'bottom',
+			orentationHorizontalInitial: 'left',
+			orentationVerticalInitial: 'bottom'
 		}
 
 
@@ -36,17 +38,22 @@ class Dropdown extends React.Component {
 			positionState.orentationHorizontal = 'right';
 		} else if (optionsRect.left < 0) {
 			positionState.orentationHorizontal = 'left';
-		} else if (titleRect.bottom + optionsRect.height > window.innerHeight) {
+		} else {
+			positionState.orentationHorizontal = this.state.orentationHorizontalInitial;
+		}
+		if (titleRect.bottom + optionsRect.height > window.innerHeight) {
 			positionState.orentationVertical = 'top';
 		} else if (optionsRect.top < 0) {
 			positionState.orentationVertical = 'bottom';
+		} else {
+			positionState.orentationVertical = this.state.orentationVerticalInitial;
 		}
 
 		if (positionState.orentationHorizontal !== this.state.orentationHorizontal
 				||positionState.orentationVertical !== this.state.orentationVertical)  {
 			this.setState(positionState);
-				console.log(positionState)
 		}
+
 	}
 
 	toggleOpen(newState) {
@@ -56,7 +63,8 @@ class Dropdown extends React.Component {
 
 	}
 
-	handleClick = () => {
+	handleClick = (e) => {
+		console.log(e.target)
 		const isOpen = this.state.isOpen;
 		if (isOpen) {
 			this.toggleOpen({isOpen: false})
@@ -66,11 +74,18 @@ class Dropdown extends React.Component {
 	}
 
 	handleDocumentClick = (e) => {
-		console.log(e.target)
-		const isOpen = this.state.isOpen;
-		if (isOpen&&contains(this.dropdownOptions, e.target)||isOpen&&!contains(ReactDOM.findDOMNode(this), e.target)) {
+		if (this.handleThisClick(e)) {
 			this.toggleOpen({isOpen: false});
 		}
+	}
+
+	handleThisClick(e) {
+		const isOpen = this.state.isOpen;
+		const title= this.dropdownTitle;
+		let res = false;
+
+		return isOpen&&e.target !== title
+					 &&!contains(ReactDOM.findDOMNode(title), e.target);
 	}
 
 	componentWillUnmount() {

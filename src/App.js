@@ -3,15 +3,28 @@ import logo from './logo.svg';
 import './App.css';
 import ProjectForm from './ProjectForm/ProjectForm';
 import ProjectList from './ProjectList/ProjectList';
+import dataService from './dataService'
 
 class App extends Component {
 
-  constructor(props) {
+  constructor(props) {  
     super(props);
 
     this.state = {
-      projects: [{title: 'test',status: 'active',time: 200,rate: 20, id: '24'}]
+      projects: dataService.getProjects()
     }
+    console.log(this.state)
+  }
+
+  componentDidMount() {
+    dataService.on('updateProjects', this.updateProjects);
+  }
+
+  updateProjects = () => {
+    this.setState({
+      projects: dataService.getProjects()
+    })
+
   }
 
   addProject = (project) => {
@@ -33,11 +46,12 @@ class App extends Component {
           className='app-body'
         >
           <ProjectForm onSubmit={this.addProject} />
-          <ProjectList projects={this.state.projects} />
+          <ProjectList projects={this.state.projects} visibilityFilter='ACTIVE' />
         </div>
       </div>
     );
   }
+
 }
 
 export default App;

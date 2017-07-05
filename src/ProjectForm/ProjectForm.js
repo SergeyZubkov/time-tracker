@@ -1,30 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './ProjectForm.css';
-import cuid from 'cuid';
+import dataService from '../dataService'
 
 class ProjectForm extends React.Component {
 	constructor(props) {
 		super(props)
 
+		this.state = {
+			disableBtn: true
+		}
 	}
 
 	componentDidMount() {
 		ReactDOM.findDOMNode(this.title).focus();
 	}
 
+	changeForm = () => {
+		if (this.title.value&&this.rate.value) {
+			this.setState({
+				disableBtn: false
+			})
+		}
+	}
+
 	createProject = (e) => {
-		console.log('aaa')
 		e.preventDefault();
-		this.props.onSubmit({
-			id: cuid(),
-			title: this.title.value, 
-			rate: this.rate.value,
-			// seconds
-			time: 0,
-			status: 'ACTIVE'
+		if (!this.title.value||!this.rate.value) {
+			return 
+		}
+		dataService.createProject({
+			title: this.title.value,
+			rate: this.rate.value
 		});
 		this.title.value = this.rate.value = null;
+		this.setState({
+			disableBtn: true
+		})
 	}
 
 	render() {
@@ -32,6 +44,7 @@ class ProjectForm extends React.Component {
 			<form
 				className='project-form'
 				onSubmit={this.createProject}
+				onChange={this.changeForm}
 			>
 				<input
 					type='text'
@@ -46,7 +59,7 @@ class ProjectForm extends React.Component {
 					ref={rate => this.rate = rate}
 				/>
 				<button
-					className='btn-submit'
+					className={this.state.disableBtn ? 'btn-submit btn-submit_disable' : 'btn-submit'}
 				>
 					Создать
 				</button>
