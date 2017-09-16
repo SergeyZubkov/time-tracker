@@ -17,13 +17,12 @@ class Dropdown extends React.Component {
 			orentationHorizontalInitial: 'left',
 			orentationVerticalInitial: 'bottom'
 		}
-
-
-		console.log(addEventListener)
 	}
 
 	componentDidMount() {
 		this.documentListener = listen(document, 'click', this.handleDocumentClick, false);
+		this.resizeListener = listen(document, 'resize', this.updatePosition, false);
+		this.updatePosition();
 	}
 
 	updatePosition() {
@@ -101,7 +100,7 @@ class Dropdown extends React.Component {
 
 		return (
 			<div 
-				className={`dropdown ${this.props.className}`}
+				className={`dropdown ${this.props.className||''}`}
 			>
 				<div className='dropdown-title' 
 					ref={dropdownTitle => this.dropdownTitle = dropdownTitle}

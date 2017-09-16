@@ -19,6 +19,19 @@
 	font-family: "Roboto", sans-serif;
 }
 
+.project-form input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #999;
+}
+.project-form input::-moz-placeholder { /* Firefox 19+ */
+	color: #999;
+}
+.project-form input:-ms-input-placeholder { /* IE 10+ */
+  color: #999;
+}
+.project-form input:-moz-placeholder { /* Firefox 18- */
+  color: #999;
+}
+
 .project-form input:first-child {
 	width: 400px
 }

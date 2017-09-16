@@ -3,11 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import ProjectForm from './ProjectForm/ProjectForm';
 import ProjectList from './ProjectList/ProjectList';
+import Intro from './Intro/Intro';
 import dataService from './dataService'
 
 class App extends Component {
 
-  constructor(props) {  
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -45,6 +46,7 @@ class App extends Component {
         <div
           className='app-body'
         >
+          <Intro />
           <ProjectForm onSubmit={this.addProject} />
           <ProjectList projects={this.state.projects} visibilityFilter='ACTIVE' />
         </div>

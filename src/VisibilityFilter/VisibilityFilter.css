@@ -6,17 +6,17 @@
 	display: inline-block;
 	text-transform: uppercase;
 	font-size: 14px;
-	margin-right: 10px;
+	margin-right: 20px;
 	cursor: pointer;
 	color: #999;
 }
 
-.visibility-filter__option:hover {
+.visibility-filter__option-text:hover {
 	text-decoration: underline;
-	
 }
 
-.visibility-filter__option_active {
+.visibility-filter__option_active
+.visibility-filter__option-text {
 	color: #35b6da;
 	text-decoration: underline;
 }

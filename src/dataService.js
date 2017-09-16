@@ -44,10 +44,10 @@ class DataService extends MicroEmitter {
 
 		project = Object.assign({}, project, objNewValues);
 
-		this.state.projects = [...projects]
-		this.state.projects.splice(elementPos, 0, project);
 
-		console.log(projects)
+		this.state.projects = [...projects]
+		this.state.projects.splice(elementPos, 0, project)
+		console.log(objNewValues)
 		this.trigger('updateProjects')
 	}
 
@@ -60,12 +60,12 @@ class DataService extends MicroEmitter {
 const dataService = new DataService({
 	// time в секундах
 	projects: [
-		{title: 'test',status: 'ACTIVE',time: 200,rate: 20, id: '24', isTrackering: false},
-		{title: 'test mest',status: 'ACTIVE',time: 20,rate: 2, id: '25', isTrackering: false},
-		{title: 'do something',status: 'ACTIVE',time: 44444,rate: 820, id: '21',  isTrackering: false},
-		{title: 'learn english',status: 'ACTIVE',time: 5,rate: 340, id: '22', isTrackering: false},
-		{title: 'reat Dostoevsky',status: 'ACTIVE',time: 190,rate: 1500, id: '4',  isTrackering: false},
-		{title: 'create Time Tracker',status: 'ACTIVE',time: 1,rate: 22000, id: '2',  isTrackering: false}
+		{title: 'проект-1',status: 'ACTIVE',time: 200,rate: 20, id: '24', isTrackering: false},
+		{title: 'проект-2',status: 'ACTIVE',time: 20,rate: 2, id: '25', isTrackering: false},
+		{title: 'проект-3',status: 'ACTIVE',time: 44444,rate: 820, id: '21',  isTrackering: false},
+		{title: 'проект-4',status: 'ACTIVE',time: 5,rate: 340, id: '22', isTrackering: false},
+		{title: 'проект-5',status: 'ACTIVE',time: 190,rate: 1500, id: '4',  isTrackering: false},
+		{title: 'проект-6',status: 'COMPLETE',time: 1,rate: 22000, id: '2',  isTrackering: false}
 	]
 });
 

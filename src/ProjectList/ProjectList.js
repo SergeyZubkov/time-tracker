@@ -8,7 +8,7 @@ class ProjectList extends React.Component {
 
 	constructor(props) {
 		super(props);
-		
+
 		this.state = {
 			visibilityFilter: this.props.visibilityFilter
 		}
@@ -32,9 +32,16 @@ class ProjectList extends React.Component {
 			<div
 				className='project-list'
 			>
-				<VisibilityFilter onChange={this.changeVisibilityFilter} />
+				<VisibilityFilter
+					items={this.props.projects}
+					onChange={this.changeVisibilityFilter}
+				/>
 				{projects.map( p => {
-					return <Project project={p} key={p.id} />
+					return <Project
+						key={p.id}
+						indicateStatus={filter === 'ALL'}
+						project={p}
+					/>
 				})}
 			</div>
 		)

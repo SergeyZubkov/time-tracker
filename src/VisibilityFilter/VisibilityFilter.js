@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './VisibilityFilter.css';
+import Counter from '../Counter/Counter';
 
 class VisibilityFilter extends Component {
 
-  constructor(props) {  
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -17,7 +18,7 @@ class VisibilityFilter extends Component {
 
   showComplete = () => {
     this.setState({show: 'COMPLETE'}, () => this.props.onChange(this.state.show));
-    
+
   }
 
   showAll = () => {
@@ -29,23 +30,38 @@ class VisibilityFilter extends Component {
 
     return (
       <div className="visibility-filter">
-        <div 
+        <div
           className={"visibility-filter__option " + isActive('ACTIVE')}
           onClick={this.showActive}
         >
-          активные
+          <Counter
+            number={this.props.items.filter(item => item.status === 'ACTIVE').length}
+          />
+          <div className="visibility-filter__option-text">
+            активные
+          </div>
         </div>
-        <div 
+        <div
           className={"visibility-filter__option " + isActive('COMPLETE')}
           onClick={this.showComplete}
         >
-          завершенные
+          <Counter
+            number={this.props.items.filter(item => item.status === 'COMPLETE').length}
+          />
+          <div className="visibility-filter__option-text">
+            завершенные
+          </div>
         </div>
-        <div 
+        <div
           className={"visibility-filter__option " + isActive('ALL')}
           onClick={this.showAll}
         >
-          все
+          <Counter
+            number={this.props.items.length}
+          />
+          <div className="visibility-filter__option-text">
+            все
+          </div>
         </div>
       </div>
     );

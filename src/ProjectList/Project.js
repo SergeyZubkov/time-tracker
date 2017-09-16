@@ -16,31 +16,53 @@ class Project extends React.Component {
 		super(props);
 
 		this.state = {
-			editMode: false, 
+			editMode: false,
 			newValue: {},
-			isTrackering: false
+			isTrackering: this.props.project.isTrackering
+		}
+	}
+
+	startTimer() {
+		const tick = () => {
+			let {
+				id,
+				time
+			} = this.props.project;
+
+			dataService.updateProject(id, {time: time + 1});
+		}
+
+		tick();
+
+		this.timer = setInterval(tick, 1000);
+	}
+
+	stopTimer() {
+		clearInterval(this.timer);
+	}
+
+	setupTimer() {
+		let isTrackering = this.state.isTrackering;
+		if (isTrackering) {
+			this.startTimer();
+		} else {
+			this.stopTimer();
 		}
 	}
 
 	componentWillMount() {
-		if (this.props.project.isTrackering) {
-			this.timer = setInterval(() => {
-				dataService.updateProject(this.props.project.id, {time: this.props.project.time + 1});
-			}, 1000);
-		}
+		this.setupTimer();
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.project.isTrackering === this.props.project.isTrackering) return 
-		if (nextProps.project.isTrackering) {
-			this.timer = setInterval(() => {
-				dataService.updateProject(this.props.project.id, {time: this.props.project.time + 1});
-			}, 1000);
-		} else {
-			clearInterval(this.timer);
-		}
+		if (nextProps.project.isTrackering === this.props.project.isTrackering) return
+
+		this.setState(
+			{isTrackering: nextProps.project.isTrackering},
+			() =>	this.setupTimer()
+		)
 	}
-	
+
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
@@ -78,6 +100,10 @@ class Project extends React.Component {
 		if(this.timer) {
 			clearInterval(this.timer)
 		}
+	}
+
+	resume = () => {
+		dataService.updateProject(this.props.project.id, {status: 'ACTIVE'});
 	}
 
 	delete = () => {
@@ -119,34 +145,45 @@ class Project extends React.Component {
 					className={`project-item__dropdown`}
 					title={<FontAwesome name='ellipsis-v' />}
 				>
-					<div 
+					<div
 						onClick={this.complete}
 						style={
 							{display: status === 'COMPLETE' ? 'none': ''}
 						}
-					> 
-						Завершить 
+					>
+						Завершить
 					</div>
-					<div 
+					<div
+						onClick={this.resume}
+						style={
+							{display: status === 'COMPLETE' ? '': 'none'}
+						}
+					>
+						Возобновить
+					</div>
+					<div
 						style={
 							{
 								display: this.state.editMode ? 'none' : ''
 							}
 						}
 						onClick={this.edit}
-					> 
-						Редактировать 
+					>
+						Редактировать
 					</div>
 					<div onClick={this.delete}> Удалить </div>
 				</Dropdown>
 				<span
 					className={getStatusClName()}
+					style={{
+						display: this.props.indicateStatus ? '' :  "none"
+					}}
 				>
 				</span>
 				<span
 					className='project-item__title'
 				>
-					<Editable 
+					<Editable
 						type='string'
 						prop='title'
 						value={title}
@@ -159,7 +196,7 @@ class Project extends React.Component {
 				<span
 					className='project-item__rate'
 				>
-					<Editable 
+					<Editable
 						type='number'
 						prop='rate'
 						value={rate}
@@ -169,14 +206,14 @@ class Project extends React.Component {
 						{rate}
 						<FontAwesome
 							name='rub'
-						/> 
+						/>
 						/ час
 					</Editable>
 				</span>
 				<span
 					className='project-item__time'
 				>
-					<Editable 
+					<Editable
 						type='number'
 						prop='time'
 						value={time}
@@ -192,8 +229,8 @@ class Project extends React.Component {
 						{display: this.state.editMode||this.props.project.status==='COMPLETE' ? 'none' : ''}
 					}
 				>
-					<PlayBtn 
-						play={this.props.project.isTrackering} 
+					<PlayBtn
+						play={this.props.project.isTrackering}
 						onClick={this.toggleTracking}
 					/>
 				</span>
@@ -217,12 +254,12 @@ class Project extends React.Component {
 						}
 					}
 				>
-					<FontAwesome 
-						name='check' 
+					<FontAwesome
+						name='check'
 						onClick={this.update}
 						/>
-					<FontAwesome 
-						name='times' 
+					<FontAwesome
+						name='times'
 						onClick={this.exitEdit}
 					/>
 				</span>
