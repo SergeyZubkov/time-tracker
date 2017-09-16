@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ProjectForm from './ProjectForm/ProjectForm';
-import ProjectList from './ProjectList/ProjectList';
+import ProjectList from './containers/ProjectList/ProjectList';
 import Intro from './Intro/Intro';
 import dataService from './dataService'
 
@@ -48,7 +48,7 @@ class App extends Component {
         >
           <Intro />
           <ProjectForm onSubmit={this.addProject} />
-          <ProjectList projects={this.state.projects} visibilityFilter='ACTIVE' />
+          <ProjectList />
         </div>
       </div>
     );

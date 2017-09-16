@@ -1,10 +1,10 @@
 import React from 'react';
 import './Project.css';
-import Dropdown from '../Dropdown/Dropdown';
+import Dropdown from '../../Dropdown/Dropdown';
 import FontAwesome from 'react-fontawesome';
-import dataService from '../dataService';
-import Editable from '../Editable/Editable';
-import PlayBtn from '../PlayBtn/PlayBtn';
+import dataService from '../../dataService';
+import Editable from '../../Editable/Editable';
+import PlayBtn from '../../PlayBtn/PlayBtn';
 
 // перенести в пропсы все свойства объекта project (излишне каждый раз обращаться к объекту project)
 // если мы меняем проекту статус на "COMPLETE", при этом он является отслеживаемым, то таймер должен выключаться

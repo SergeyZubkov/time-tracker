@@ -1,33 +1,25 @@
 import React, { Component } from 'react';
 import './VisibilityFilter.css';
-import Counter from '../Counter/Counter';
+import Counter from '../../Counter/Counter';
+import {changeVisibility} from '../../actions/visibilityFilter';
+import {connect} from 'react-redux';
 
 class VisibilityFilter extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      show: 'ACTIVE'
-    }
-  }
-
   showActive = () => {
-    this.setState({show: 'ACTIVE'}, () => this.props.onChange(this.state.show));
-  }
-
-  showComplete = () => {
-    this.setState({show: 'COMPLETE'}, () => this.props.onChange(this.state.show));
-
+    this.props.onChangeVisibility('ACTIVE');
   }
 
   showAll = () => {
-    this.setState({show: 'ALL'}, () => this.props.onChange(this.state.show));
+    this.props.onChangeVisibility('ALL');
+  }
+
+  showComplete = () => {
+    this.props.onChangeVisibility('COMPLETE');
   }
 
   render() {
-    const isActive = (value) => this.state.show === value ? 'visibility-filter__option_active' : 'visibility-filter__option';
-
+    const isActive = (value) => this.props.visibility === value ? 'visibility-filter__option_active' : 'visibility-filter__option';
+    console.log(this.props)
     return (
       <div className="visibility-filter">
         <div
@@ -66,7 +58,14 @@ class VisibilityFilter extends Component {
       </div>
     );
   }
-
 }
 
-export default VisibilityFilter;
+const mapStateToProps = (state) => ({
+  visibility: state.visibilityFilter
+});
+
+const mapDispatchToProps = {
+  onChangeVisibility: changeVisibility
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(VisibilityFilter);

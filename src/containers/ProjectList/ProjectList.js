@@ -1,26 +1,13 @@
 import React from 'react';
 import Project from './Project'
 import './ProjectList.css';
-
-import VisibilityFilter from './../VisibilityFilter/VisibilityFilter';
+import VisibilityFilter from '../VisibilityFilter/VisibilityFilter';
+import {connect} from 'react-redux';
 
 class ProjectList extends React.Component {
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			visibilityFilter: this.props.visibilityFilter
-		}
-	}
-
-	changeVisibilityFilter = (value) => {
-		console.log(value)
-		this.setState({visibilityFilter: value});
-	}
-
 	render() {
-		let filter = this.state.visibilityFilter;
+		let filter = this.props.visibilityFilter;
 		let projects = this.props.projects.filter(project => {
 			if (filter === 'ALL') {
 				return project;
@@ -34,7 +21,6 @@ class ProjectList extends React.Component {
 			>
 				<VisibilityFilter
 					items={this.props.projects}
-					onChange={this.changeVisibilityFilter}
 				/>
 				{projects.map( p => {
 					return <Project
@@ -48,5 +34,9 @@ class ProjectList extends React.Component {
 	}
 }
 
+const mapStateToProps = (state) => ({
+  projects: state.projects,
+  visibilityFilter: state.visibilityFilter
+})
 
-export default ProjectList;
+export default connect(mapStateToProps)(ProjectList);
