@@ -22,9 +22,9 @@ class ProjectList extends React.Component {
 				<VisibilityFilter
 					items={this.props.projects}
 				/>
-				{projects.map( p => {
+				{projects.map( (p, i) => {
 					return <Project
-						key={p.id}
+						key={i}
 						indicateStatus={filter === 'ALL'}
 						project={p}
 					/>

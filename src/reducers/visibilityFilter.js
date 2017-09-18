@@ -1,4 +1,4 @@
-const visibilityFilter = (state='ALL', action) => {
+const visibilityFilter = (state='ACTIVE', action) => {
   switch (action.type) {
     case 'CHANGE_VISIBILITY':
       return action.visibility;
