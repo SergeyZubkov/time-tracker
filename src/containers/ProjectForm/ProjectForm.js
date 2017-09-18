@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './ProjectForm.css';
-import dataService from '../dataService'
+import {addProject} from '../../actions/projects'
+import {connect} from 'react-redux';
 
 class ProjectForm extends React.Component {
 	constructor(props) {
@@ -27,9 +28,10 @@ class ProjectForm extends React.Component {
 	createProject = (e) => {
 		e.preventDefault();
 		if (!this.title.value||!this.rate.value) {
-			return 
+			return
 		}
-		dataService.createProject({
+		console.log(this.props)
+		this.props.onCreateProject({
 			title: this.title.value,
 			rate: this.rate.value
 		});
@@ -68,4 +70,8 @@ class ProjectForm extends React.Component {
 	}
 }
 
-export default ProjectForm;
+const mapDispatchToProps = {
+	onCreateProject: addProject
+};
+
+export default connect(null, mapDispatchToProps)(ProjectForm);

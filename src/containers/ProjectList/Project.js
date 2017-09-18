@@ -2,7 +2,8 @@ import React from 'react';
 import './Project.css';
 import Dropdown from '../../Dropdown/Dropdown';
 import FontAwesome from 'react-fontawesome';
-import dataService from '../../dataService';
+import {connect} from 'react-redux';
+import {removeProject, updateProject} from '../../actions/projects';
 import Editable from '../../Editable/Editable';
 import PlayBtn from '../../PlayBtn/PlayBtn';
 
@@ -29,7 +30,7 @@ class Project extends React.Component {
 				time
 			} = this.props.project;
 
-			dataService.updateProject(id, {time: time + 1});
+			this.props.onUpdateProject(id, {time: time + 1});
 		}
 
 		tick();
@@ -77,15 +78,13 @@ class Project extends React.Component {
 		this.setState({
 			newValue: Object.assign(this.state.newValue, {[prop]: val})
 		})
-		console.log(this.state)
 	}
 
 	update = () => {
 		this.setState({
 			editMode: !this.state.editMode
 		}, () => {
-			console.log(dataService);
-			dataService.updateProject(this.props.project.id, this.state.newValue);
+			this.props.onUpdateProject(this.props.project.id, this.state.newValue);
 		})
 	}
 
@@ -96,22 +95,22 @@ class Project extends React.Component {
 	}
 
 	complete = () => {
-		dataService.completeProject(this.props.project.id);
+		this.props.onUpdateProject(this.props.project.id, {status: 'COMPLETE'});
 		if(this.timer) {
 			clearInterval(this.timer)
 		}
 	}
 
 	resume = () => {
-		dataService.updateProject(this.props.project.id, {status: 'ACTIVE'});
+		this.props.onUpdateProject(this.props.project.id, {status: 'ACTIVE'});
 	}
 
 	delete = () => {
-		dataService.removeProject(this.props.project.id);
+		this.props.onRemoveProject(this.props.project.id);
 	}
 
 	toggleTracking = () => {
-		dataService.updateProject(this.props.project.id, {isTrackering: !this.props.project.isTrackering})
+		this.props.onUpdateProject(this.props.project.id, {isTrackering: !this.props.project.isTrackering})
 	}
 
 	render() {
@@ -213,6 +212,9 @@ class Project extends React.Component {
 				<span
 					className='project-item__time'
 				>
+					<FontAwesome
+						name='clock-o'
+					/>
 					<Editable
 						type='number'
 						prop='time'
@@ -222,6 +224,7 @@ class Project extends React.Component {
 					>
 						{time}
 					</Editable>
+					мин.
 				</span>
 				<span
 					className='project-item__play-btn'
@@ -268,4 +271,9 @@ class Project extends React.Component {
 	}
 }
 
-export default Project;
+const mapDispatchToProps = {
+	onRemoveProject: removeProject,
+	onUpdateProject: updateProject
+}
+
+export default connect(null, mapDispatchToProps)(Project);

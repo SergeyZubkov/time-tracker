@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ProjectForm from './ProjectForm/ProjectForm';
+import ProjectForm from './containers/ProjectForm/ProjectForm';
 import ProjectList from './containers/ProjectList/ProjectList';
 import Intro from './Intro/Intro';
 import dataService from './dataService'
