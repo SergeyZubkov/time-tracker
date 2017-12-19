@@ -7,11 +7,13 @@ import {connect} from 'react-redux';
 class ProjectList extends React.Component {
 
 	render() {
+		console.log(this.props.projects);
 		let filter = this.props.visibilityFilter;
 		let projects = this.props.projects.filter(project => {
 			if (filter === 'ALL') {
 				return project;
 			}
+
 			return project.status === filter;
 		})
 		console.log(filter)

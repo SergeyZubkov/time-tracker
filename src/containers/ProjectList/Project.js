@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {removeProject, updateProject} from '../../actions/projects';
 import Editable from '../../Editable/Editable';
 import PlayBtn from '../../PlayBtn/PlayBtn';
+import Time from '../../Time/Time';
 
 // перенести в пропсы все свойства объекта project (излишне каждый раз обращаться к объекту project)
 // если мы меняем проекту статус на "COMPLETE", при этом он является отслеживаемым, то таймер должен выключаться
@@ -30,7 +31,7 @@ class Project extends React.Component {
 				time
 			} = this.props.project;
 
-			this.props.onUpdateProject(id, {time: time + 1});
+			this.props.onUpdateProject(id, {time: time + 1000});
 		}
 
 		tick();
@@ -222,7 +223,7 @@ class Project extends React.Component {
 						<FontAwesome
 							name='clock-o'
 						/>
-						{time} мин.
+						<Time ms={time} />
 					</Editable>
 				</span>
 				<span
@@ -244,7 +245,7 @@ class Project extends React.Component {
 					}
 					className='project-item__sum'
 				>
-					{Math.round(time / 60 / 60 * rate)}
+					{Math.round(time / 1000 / 60 / 60 * rate)}
 					<FontAwesome
 							name='rub'
 					/>

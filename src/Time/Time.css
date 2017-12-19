@@ -1,0 +1,7 @@
+.time .seconds {
+	font-size: 11px;
+}
+
+.time span{
+	margin: 0 -3px;
+}
