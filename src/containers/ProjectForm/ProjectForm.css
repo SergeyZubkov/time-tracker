@@ -1,13 +1,32 @@
 .project-form {
 	border: 1px solid #e8ebed;
 	background: #fff;
-	width: 900px;
+	max-width: 900px;
 	height: 60px;
 	margin: 100px 0 50px;
 	display: flex;
 	align-items: center;
 	padding: 0 30px;
 	border-bottom: 2px solid #e8ebed;
+}
+
+@media (max-width: 480px) {	
+	.project-form {
+		width: 100%;
+		height: auto;
+		margin: 40px 0 30px;
+		flex-direction: column;
+		gap: 10px;
+		padding: 10px 15px;
+	}
+	.project-form input {
+		width: 100% !important;
+		margin: 0 !important;
+	}
+	.btn-submit,
+	.btn-submit.btn-submit_disable {
+		width: 100% !important;
+	}
 }
 
 .project-form input {
@@ -33,7 +52,7 @@
 }
 
 .project-form input:first-child {
-	width: 400px
+	max-width: 400px
 }
 .project-form input:nth-child(2) {
 	width: 100px;

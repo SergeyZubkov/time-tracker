@@ -6,8 +6,7 @@ class Intro extends React.Component {
     return (
       <div className="intro">
         <p>
-          Можно создать проект, указать почасовую ставку и отслеживать итоговую
-          сумму
+          Создай проект и отслеживай свой заработок
         </p>
       </div>
     )

@@ -173,13 +173,13 @@ class Project extends React.Component {
 					</div>
 					<div onClick={this.delete}> Удалить </div>
 				</Dropdown>
-				<span
+				{/* <span
 					className={getStatusClName()}
 					style={{
 						display: this.props.indicateStatus ? '' :  "none"
 					}}
 				>
-				</span>
+				</span> */}
 				<span
 					className='project-item__title'
 				>
@@ -220,10 +220,10 @@ class Project extends React.Component {
 						isEditMode={this.state.editMode}
 						onAfterEdit={this.updateValue}
 					>
+						<Time ms={time} />
 						<FontAwesome
 							name='clock-o'
 						/>
-						<Time ms={time} />
 					</Editable>
 				</span>
 				<span

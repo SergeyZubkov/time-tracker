@@ -1,8 +1,15 @@
 .project-list {
 	padding: 0;
 	list-style: none;
-	width: 900px;
 	background: hsla(0, 0%, 98%, 1);
 	padding-top: 20px;
 	border: 1px solid #efefef;
+	width: 600px;
+}
+
+
+@media (max-width: 480px) {
+	.project-list {
+		width: 100%;
+	}
 }

@@ -1,5 +1,9 @@
 .intro {
-  width: 900px;
+  max-width: 900px;
   margin-top: 50px;
   color: #dec296;
+}
+
+@media (max-width: 480px) {	
+  
 }

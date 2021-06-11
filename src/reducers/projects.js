@@ -3,8 +3,8 @@ const initialState = [
 		{title: 'проект-2',status: 'ACTIVE',time: 2000000000,rate: 2, id: '2', isTrackering: false},
 		{title: 'проект-3',status: 'ACTIVE',time: 444440,rate: 820, id: '3',  isTrackering: false},
 		{title: 'проект-4',status: 'ACTIVE',time: 5000000,rate: 340, id: '4', isTrackering: false},
-		{title: 'проект-5',status: 'ACTIVE',time: 190000000,rate: 1500, id: '5',  isTrackering: false},
-		{title: 'проект-6',status: 'COMPLETE',time: 1000000000000,rate: 22000, id: '6',  isTrackering: false}
+		{title: 'проект-5',status: 'ACTIVE',time: 19000,rate: 1500, id: '5',  isTrackering: false},
+		{title: 'проект-6',status: 'COMPLETE',time: 100000,rate: 220, id: '6',  isTrackering: false}
 	]
 
 
